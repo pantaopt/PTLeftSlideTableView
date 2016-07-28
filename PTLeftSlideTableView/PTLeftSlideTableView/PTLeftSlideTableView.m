@@ -15,24 +15,6 @@
 
 @implementation PTLeftSlideTableView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.btnWidth = 74.0;
-    self.btnFont = 15.0;
-    NSMutableArray *colorArr = [NSMutableArray array];
-    for (int i = 0; i < self.editingArr.count; i++) {
-        [colorArr addObject:[UIColor redColor]];
-    }
-    self.editingBgColorArr = [NSArray arrayWithArray:colorArr];
-    colorArr = [NSMutableArray array];
-    for (int i = 0; i < self.editingArr.count; i++) {
-        [colorArr addObject:[UIColor whiteColor]];
-    }
-    self.editingTColorArr = [NSArray arrayWithArray:colorArr];
-}
 
 //- (id<PTLeftSlideTableViewDelegate>)PTdelegate{
 //    return (id<PTLeftSlideTableViewDelegate>)self.tableView.delegate;
@@ -42,9 +24,51 @@
 //    return (id<PTLeftSlideTableViewDatasource>)self.tableView.dataSource;
 //}
 
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        self.delegate = self;
+        self.dataSource = self;
+        self.btnWidth = 74.0;
+        self.btnFont = 15.0;
+        NSMutableArray *colorArr = [NSMutableArray array];
+        for (int i = 0; i < self.editingArr.count; i++) {
+            [colorArr addObject:[UIColor redColor]];
+        }
+        self.editingBgColorArr = [NSArray arrayWithArray:colorArr];
+        colorArr = [NSMutableArray array];
+        for (int i = 0; i < self.editingArr.count; i++) {
+            [colorArr addObject:[UIColor whiteColor]];
+        }
+        self.editingTColorArr = [NSArray arrayWithArray:colorArr];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.delegate = self;
+        self.dataSource = self;
+        self.btnWidth = 74.0;
+        self.btnFont = 15.0;
+        NSMutableArray *colorArr = [NSMutableArray array];
+        for (int i = 0; i < self.editingArr.count; i++) {
+            [colorArr addObject:[UIColor redColor]];
+        }
+        self.editingBgColorArr = [NSArray arrayWithArray:colorArr];
+        colorArr = [NSMutableArray array];
+        for (int i = 0; i < self.editingArr.count; i++) {
+            [colorArr addObject:[UIColor whiteColor]];
+        }
+        self.editingTColorArr = [NSArray arrayWithArray:colorArr];
+    }
+    return self;
+}
+
 #pragma mark -是否编辑
 - (void)editing:(BOOL)isEditing{
-    self.tableView.editing = isEditing;
+    self.editing = isEditing;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -168,12 +192,12 @@
 
 #pragma mark -全局刷新
 - (void)PTReload{
-    [self.tableView reloadData];
+    [self reloadData];
 }
 
 #pragma mark -单行更新
 - (void)PTReloadRowsAtIndexPathWithRowAnimation:(UITableViewRowAnimation)animation{
-    [self.tableView reloadRowsAtIndexPaths:@[self.indexPath] withRowAnimation:animation];
+    [self reloadRowsAtIndexPaths:@[self.indexPath] withRowAnimation:animation];
 }
 
 

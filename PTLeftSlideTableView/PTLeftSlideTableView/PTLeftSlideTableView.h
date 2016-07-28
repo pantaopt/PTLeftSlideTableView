@@ -32,7 +32,7 @@
 
 @end
 
-@interface PTLeftSlideTableView : UITableViewController
+@interface PTLeftSlideTableView : UITableView
 
 @property (weak, nonatomic) id<PTLeftSlideTableViewDatasource> PTdataSource;
 @property (weak, nonatomic) id<PTLeftSlideTableViewDelegate> PTdelegate;

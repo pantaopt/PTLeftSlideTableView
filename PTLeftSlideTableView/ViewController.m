@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:self.tableView.view];
+    [self.view addSubview:self.tableView];
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"移动" style:UIBarButtonItemStylePlain target:self action:@selector(move)];
 }
@@ -75,8 +75,7 @@
 
 - (PTLeftSlideTableView *)tableView{
     if (!_tableView) {
-        _tableView = [[PTLeftSlideTableView alloc]init];
-        [_tableView.view setFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-64)];
+        _tableView = [[PTLeftSlideTableView alloc]initWithFrame:self.view.frame];
         _tableView.PTdelegate = self;
         _tableView.PTdataSource = self;
         _tableView.btnFont = 11.0;
