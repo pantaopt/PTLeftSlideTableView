@@ -171,9 +171,19 @@
     contentView.backgroundColor = [UIColor whiteColor];
     for (int i=0; i<self.editingArr.count; i++) {
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(i*(self.btnWidth+1), 0, self.btnWidth, self.btnHeight)];
-        btn.backgroundColor = self.editingBgColorArr[i];
+        
+        if (self.editingBgColorArr.count < self.editingArr.count && i > self.editingBgColorArr.count - 1) {
+            btn.backgroundColor = [UIColor redColor];
+        }else{
+            btn.backgroundColor = self.editingBgColorArr[i];
+        }
+        if (self.editingTColorArr.count < self.editingArr.count && i > self.editingTColorArr.count - 1) {
+            [btn setTitleColor:[UIColor whiteColor]forState:UIControlStateNormal];
+        }else{
+            
+            [btn setTitleColor:self.editingTColorArr[i] forState:UIControlStateNormal];
+        }
         [btn setTitle:self.editingArr[i] forState:UIControlStateNormal];
-        [btn setTitleColor:self.editingTColorArr[i] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
         btn.titleLabel.font = [UIFont systemFontOfSize:self.btnFont];
         [contentView addSubview:btn];
