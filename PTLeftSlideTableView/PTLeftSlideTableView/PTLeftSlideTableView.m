@@ -15,6 +15,15 @@
 
 @implementation PTLeftSlideTableView
 
+- (void)dealloc{
+    for (UIView *v in self.cell.subviews) {
+        if ([v isKindOfClass:[NSClassFromString(@"UITableViewCellContentView") class]]) {
+            [v addObserver:self forKeyPath:@"frame" options: NSKeyValueObservingOptionNew |
+             NSKeyValueObservingOptionOld context:nil];
+            [v removeObserver:self forKeyPath:@"frame"context:nil];
+        }
+    }
+}
 
 //- (id<PTLeftSlideTableViewDelegate>)PTdelegate{
 //    return (id<PTLeftSlideTableViewDelegate>)self.tableView.delegate;
