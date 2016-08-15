@@ -11,16 +11,17 @@
 
 @interface PTLeftSlideTableView ()<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic, assign) BOOL isAppear;
+
 @end
 
 @implementation PTLeftSlideTableView
 
-- (void)dealloc{
+- (void)removeKVO{
     for (UIView *v in self.cell.subviews) {
         if ([v isKindOfClass:[NSClassFromString(@"UITableViewCellContentView") class]]) {
-            [v addObserver:self forKeyPath:@"frame" options: NSKeyValueObservingOptionNew |
-             NSKeyValueObservingOptionOld context:nil];
             [v removeObserver:self forKeyPath:@"frame"context:nil];
+            break;
         }
     }
 }
@@ -133,13 +134,18 @@
         if ([v isKindOfClass:[NSClassFromString(@"UITableViewCellContentView") class]]) {
             [v addObserver:self forKeyPath:@"frame" options: NSKeyValueObservingOptionNew |
              NSKeyValueObservingOptionOld context:nil];
+            self.isAppear = YES;
+            break;
         }
     }
 }
 
 #pragma mark -结束编辑
 - (void)tableView:(UITableView*)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath __TVOS_PROHIBITED{
-    
+    if (self.isAppear) {
+        [self removeKVO];
+        self.isAppear = NO;
+    }
 }
 
 #pragma mark -KVO
